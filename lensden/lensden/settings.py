@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'lensden.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME' : 'dcnmvlejhtg7s9',
-        'USER' : 'gvotocidimejpl',
-        'PASSWORD' : 'e386dc114966b14b8caf5c56ee3cfc7c2172e929a08abc86701efcaddb942045',
-        'HOST' : 'ec2-18-235-20-228.compute-1.amazonaws.com',
+        'NAME' : 'cms_school_dbs',
+        'USER' : 'postgres',
+        'PASSWORD' : 'postgrespass',
+        'HOST' :'localhost',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
