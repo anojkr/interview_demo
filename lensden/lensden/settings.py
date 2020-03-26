@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+import django_heroku 
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,7 +25,7 @@ SECRET_KEY = '_fzpv5%r=2ia$d$r*5p((@c%ayx+5ogl05l_yjzsv@6qw!9771'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1',  'dbs-cms-app.herokuapp.com/']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1',  '.herokuapp.com']
 
 
 # Application definition
@@ -77,14 +77,15 @@ WSGI_APPLICATION = 'lensden.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME' : 'dcnmvlejhtg7s9',
-        'USER' : 'gvotocidimejpl',
-        'PASSWORD' : 'e386dc114966b14b8caf5c56ee3cfc7c2172e929a08abc86701efcaddb942045',
-        'HOST' : 'ec2-18-235-20-228.compute-1.amazonaws.com',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME' : 'cms_dbs',
+        # 'USER' : 'anojkr',
+        # 'PASSWORD' : 'postgres',
+        # 'HOST' :'localhost',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 
 # Password validation
@@ -122,5 +123,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
+
+django_heroku.settings(locals())
