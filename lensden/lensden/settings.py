@@ -80,10 +80,18 @@ DATABASES = {
     # 'default': dj_database_url.config(conn_max_age=500)
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+<<<<<<< HEAD
         'NAME': 'cms_database',
         'USER' : 'anojkr',
         'PASSWORD' : 'postgres',
         'HOST' : 'localhost', 
+=======
+        'NAME' : 'cms_school_dbs',
+        'USER' : 'postgres',
+        'PASSWORD' : 'postgrespass',
+        'HOST' :'localhost',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+>>>>>>> 302bdbaa8e39b62e1f42593ca25e2a3c400ab461
     }
 
 }
