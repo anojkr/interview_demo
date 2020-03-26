@@ -38,10 +38,18 @@ class Relative(models.Model):
 	relative_name = models.CharField("Relative Name", max_length = 100)
 	relation = models.CharField("Relation ", max_length = 100)	
 
+
+
 class ClassRoom(models.Model):
 	class_id = models.CharField("Room No.", max_length=50)
 	seating_capacity = models.IntegerField('Seating Capacity')
 	web_support = models.BooleanField("Web Support")
 	shape =  models.CharField("Class Shape", max_length=50, choices=shape_list, default='rectangular')
-	student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
 	subject = models.ForeignKey(Subjects, on_delete= models.CASCADE)
+	teacher_id = models.ForeignKey(Teacher, on_delete= models.CASCADE)
+
+
+class StudentClass(models.Model):
+	student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
+	class_id = models.ForeignKey(ClassRoom, on_delete=models.CASCADE)
+

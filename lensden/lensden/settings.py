@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
+import dj_database_url 
 import django_heroku 
 import os
 
@@ -76,14 +77,15 @@ WSGI_APPLICATION = 'lensden.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': dj_database_url.config(conn_max_age=500)
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME' : 'cms_dbs',
-        # 'USER' : 'anojkr',
-        # 'PASSWORD' : 'postgres',
-        # 'HOST' :'localhost',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cms_database',
+        'USER' : 'anojkr',
+        'PASSWORD' : 'postgres',
+        'HOST' : 'localhost', 
     }
+
 }
 
 
@@ -123,17 +125,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
+# STATICFILES_DIRS = (
+#     os.path.join(PROJECT_ROOT, 'static'),
+# )
 
-import dj_database_url 
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
 
 django_heroku.settings(locals())

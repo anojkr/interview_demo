@@ -4,7 +4,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ClassRoomSerializer, TeacherSerializer, StudentSerializer, RelativeSerializer, SubjectSerializer
 from .models import Teacher, Student, Subjects, ClassRoom, Relative
-# Create your views here.
+
+
+from django.http import HttpResponse
+from django.core import serializers
+import json
 
 
 @api_view(['GET'])
@@ -73,7 +77,23 @@ def add_subjects(request):
 		return Response(serializer.data,  status=200)
 	return Response(serializer.data,  status=400)
 
+@api_view(['GET'])
+def get_sum_teacher_salary(request):
 
+		query_teacher = Teacher.objects.filter(salary__gt = '100000')
+		student = Student.objects.filter()
+		res = {
+			'users': {}
+		}
 
+		for user in query_teacher:
+			res['users'][user.teacher_id] = {
+			'Teacher Id': user.teacher_id,
+			'Name': user.name,
+			'Salary': user.salary,
+			}
+
+		data = json.dumps(res)
+		return HttpResponse(data, content_type="application/json")
 
 

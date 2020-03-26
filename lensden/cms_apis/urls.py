@@ -19,6 +19,8 @@ urlpatterns = [
     path("api/add_relative/", views.add_relative, name="add_relative"),
     path("api/list_relative/", views.list_student_relative, name="show_relative"),
 
+    path("api/query2/", views.get_sum_teacher_salary, name="show_query1"),
+
 
     # """ -----------------Class Based View ----------------------"""
 
